@@ -8,6 +8,8 @@ const hangingID = document.getElementById("hanging-id");
 const idCard = document.getElementById("id-card");
 const laceLeft = document.getElementById("lace-left");
 const laceRight = document.getElementById("lace-right");
+const menuToggle = document.getElementById("menu-toggle");
+const navLinks = document.querySelector(".nav-links");
 
 // TYPING ANIMATION
 
@@ -467,3 +469,36 @@ animateID();
 idCard.addEventListener("click", () => {
     idCard.classList.toggle("flipped");
 });
+
+if (menuToggle && navLinks) {
+
+    menuToggle.addEventListener("click", ()=>{
+        
+        navLinks.classList.toggle("active");
+
+        const isOpen    = 
+        navLinks.classList.contains("active")
+
+        menuToggle.textContent  =
+        isOpen ? "✕" : "☰";
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            isOpen
+        );
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () =>{
+
+            navLinks.classList.remove("active");
+
+            menuToggle.textContent = "☰";
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+        });
+    });
+}
